@@ -20,7 +20,7 @@ module.exports = function help(message){
     const aliases = command.aliases ?? []
     
     if(aliases.length > 0){
-      embed.addField("aliases", aliases.join(",")))
+      embed.addField("aliases", aliases.join(","))
     }
     
     message.channel.send(embed)

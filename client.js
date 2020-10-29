@@ -17,6 +17,6 @@ forFiles(
   }
 )
 
-client.login(require("./token/json"))
+client.login(require("./token.json"))
 
 module.exports = client
