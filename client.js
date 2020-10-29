@@ -19,4 +19,14 @@ forFiles(
 
 client.login(require("./token/json"))
 
+client.findCommand = function (text) {
+  return this.commands.find((cmd, cmdName) => {
+    const aliases = cmd.aliases ?? []
+    return (
+      text.startsWith(cmdName) ||
+      aliases.some(alias => text.startsWith(alias))
+    )
+  })
+}
+
 module.exports = client
