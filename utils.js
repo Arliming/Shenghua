@@ -27,13 +27,3 @@ module.exports.invitation = function (guild) {
       return valides[0]
   })
 }
-
-module.exports.findCommand = function (text) {
-  return client.commands.find((cmd, cmdName) => {
-    const aliases = cmd.aliases ?? []
-    return (
-      text.startsWith(cmdName) ||
-      aliases.some(alias => text.startsWith(alias))
-    )
-  })
-}
