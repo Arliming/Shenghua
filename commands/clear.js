@@ -1,8 +1,6 @@
 const Discord = require("discord.js");
 
 module.exports = function clear(message){
-  const arg = message.content.trim().split(/\s+/)[1];
-  
   if (!message.member.hasPermission("MANAGE_MESSAGES")) {
     return message.channel.send("You do not have permission to run this command").then(msg => msg.delete({ timeout: 5000 }));
   }
@@ -10,7 +8,7 @@ module.exports = function clear(message){
     return message.channel.send("Sorry I can't messages please make sure i have the correct permissions").then(msg => msg.delete());
   }
   
-  let deleteAmount = Number(arg ?? 1)
+  let deleteAmount = Number(message.content || 1)
 
   if(isNaN(deleteAmount)) {
     return message.channel.send("Bite");
