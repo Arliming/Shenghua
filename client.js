@@ -17,29 +17,6 @@ forFiles(
   }
 )
 
-client.on("message", function (message) {
-  if(message.system || message.author.bot) return
-  // prefix check
-  if(message.content.startsWith(client.prefix)){
-    message.content = message.content.slice(client.prefix.length)
-  }else{
-    return
-  }
-  // commande appelée
-  const command = client.commands.find((cmd, cmdName) => {
-    const aliases = cmd.aliases ?? []
-    return (
-      message.content.startsWith(cmdName) ||
-      aliases.some(alias => message.content.startsWith(alias))
-    )
-  })
-  
-  if(command){
-    message.content = message.content.slice(command.name.length).trim()
-    command(message)
-  }
-})
-
 client.login(require("./token/json"))
 
 module.exports = client
