@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "discord-eval.js": "^1.0.10",
+    "discord.js": "^12.4.1",
+    "godembed": "^1.0.4"
+  },
+  "main": "index.js",
+  "scripts": {
+    "github": "git add * && git commit -m update && git push origin master"
+  }
+}
