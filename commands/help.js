@@ -1,11 +1,9 @@
 const Discord = require("discord.js")
 const path = require("path")
 
-const { findCommand } = require("../utils.js")
-
 module.exports = function help(message){
   if(message.content){
-    const command = findCommand(message.content)
+    const command = message.client.findCommand(message.content)
     
     if(!command) return message.channel.send("unknown command...")
     

@@ -1,7 +1,5 @@
 const client = require("./client.js")
 
-const { findCommand } = require("./utils.js")
-
 client.on("message", function (message) {
   if(message.system || message.author.bot) return
   // prefix check
@@ -11,7 +9,7 @@ client.on("message", function (message) {
     return
   }
   // commande appelée
-  const command = findCommand(message.content)
+  const command = client.findCommand(message.content)
   
   if(command){
     message.content = message.content.slice(command.name.length).trim()
