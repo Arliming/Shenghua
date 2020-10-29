@@ -5,9 +5,8 @@
     "godembed": "^1.0.4"
   },
   "main": "index.js",
-
-  "update": "git pull origin master",
   "scripts": {
-    "send": "git add * && git commit -m update && git push origin master"
+    "send": "git add * && git commit -m update && git push origin master",
+    "update": "git pull origin master"
   }
 }
