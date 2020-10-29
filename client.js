@@ -34,7 +34,10 @@ client.on("message", function (message) {
     )
   })
   
-  command?.(message)
+  if(command){
+    message.content = message.content.slice(command.name.length).trim()
+    command(message)
+  }
 })
 
 client.login(require("./token/json"))
