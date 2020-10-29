@@ -1,6 +1,6 @@
 const fs = require("fs").promises
-
 const path = require("path")
+const client = require("./client")
 
 module.exports.forFiles = async function(pathList,callback) {
   for (const _path of pathList) {
@@ -25,5 +25,15 @@ module.exports.invitation = function (guild) {
         return invite.expiresTimestamp < Date.now()
       })
       return valides[0]
+  })
+}
+
+module.exports.findCommand = function (text) {
+  return client.commands.find((cmd, cmdName) => {
+    const aliases = cmd.aliases ?? []
+    return (
+      text.startsWith(cmdName) ||
+      aliases.some(alias => text.startsWith(alias))
+    )
   })
 }
