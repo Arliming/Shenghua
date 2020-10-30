@@ -31,4 +31,4 @@ module.exports = function help(message){
   }
 }
 
-module.exports.description = "Liste les commandes disponibles"
+module.exports.description = "a,help ***nom de la commande***"

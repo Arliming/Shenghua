@@ -27,3 +27,5 @@ module.exports = function clear(message){
   })
 }
 module.exports.description = "Clear un certain nombre de messages"
+module.exports.longDescription = "a,clear ***nombre de messages***\nle message de suppression se supprime tout seul au bout d'un certain temps."
+module.exports.aliases = ['purge']

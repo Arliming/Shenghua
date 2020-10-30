@@ -10,4 +10,4 @@ module.exports = function js(message) {
 
 module.exports.aliases = ["eval", "code", "run"]
 
-module.exports.description = "Execute du Javascript"
+module.exports.description = "Execute du Javascript (ADMINISTRATOR)"

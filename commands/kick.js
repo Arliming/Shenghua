@@ -22,4 +22,5 @@ module.exports = function kick(message){
     }
 }
 
-module.exports.description = "You should kick her"
+module.exports.description = "You should kick him."
+module.exports.longDescription = "a,kick @.\nvous permet de kick une personne si le bot a un rôle au dessus du sien, il sera plus tard possible de kick une personne sans la ping."
