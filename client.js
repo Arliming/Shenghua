@@ -29,4 +29,12 @@ client.findCommand = function (text) {
   })
 }
 
+client.once('ready', function () {
+
+  client.user.setActivity(client.prefix + 'help', {
+      type: 'WATCHING'
+  })
+})
+
+
 module.exports = client
