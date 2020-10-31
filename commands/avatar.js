@@ -1,18 +1,18 @@
 const Discord = require("discord.js")
 
-module.exports = function avatar(message){
+module.exports = function avatar(message, member){
 
-    let text = message.content.replace(message.client.prefix+"avatar","").trim()
+    let text = message.content
 
-    let member;
+    console.log(text);
 
     if(text) {
-        member = message.mentions.members.first() || message.guild.members.find(m=>m.displayName.includes(text)) || message.member
+        member = message.mentions.members.first() || message.guild.members.cache.find(m=>m.displayName.includes(text)) || message.guild.members.cache.find(m=>m.user.username.includes(text))
     } else {
         member = message.member
     }
 
-    if(!member) return message.channel.send("Veuillez saisir un membre correct !")
+    if(!member) return message.channel.send("Son existence est à prouver...")
 
     const embed = new Discord.MessageEmbed()
 
@@ -22,7 +22,6 @@ module.exports = function avatar(message){
     .setImage(member.user.displayAvatarURL({ dynamic: true }))
     .setTimestamp();
     message.channel.send(embed)
-    message.delete()
 }
 
 module.exports.description = "Voir l'avatar d'un membre"
