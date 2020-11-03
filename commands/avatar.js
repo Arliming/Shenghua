@@ -7,7 +7,7 @@ module.exports = function avatar(message, member){
     console.log(text);
 
     if(text) {
-        member = message.mentions.members.first() || message.guild.members.cache.find(m=>m.displayName.includes(text)) || message.guild.members.cache.find(m=>m.user.username.includes(text))
+        member = message.mentions.members.first() || message.guild.members.cache.find(m => m.displayName.toLowerCase().includes(text.toLowerCase())) || message.guild.members.cache.find(m => m.user.username.toLowerCase().includes(text.toLowerCase()))
     } else {
         member = message.member
     }
