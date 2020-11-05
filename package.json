@@ -7,6 +7,7 @@
   "main": "index.js",
   "scripts": {
     "send": "git add * && git commit -m update && git push origin master",
-    "update": "git pull origin master"
+    "update": "git pull origin master",
+    "deploy": "git pull && npm i && pm2 restart shen && pm2 save"
   }
 }
