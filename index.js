@@ -11,7 +11,7 @@ client.on("message", function (message) {
   // commande appelée
   const command = client.findCommand(message.content)
   const alias =
-    command.aliases?.find((a) => message.content.startsWith(a)) || command.name
+    command?.aliases?.find((a) => message.content.startsWith(a)) || command?.name
   
   if(command){
     message.content = message.content.slice(alias.length).trim()

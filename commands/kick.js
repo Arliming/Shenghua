@@ -1,9 +1,13 @@
-module.exports = function kick(message){
+const Discord = require("discord.js")
+const { resolveMember } = require("../utils")
+
+module.exports = async function kick(message) {
+
     const {member, mentions} = message
 
     const tag = `<@${member.id}>`
-    const target = mentions.users.first()
-    const targetMember = message.guild.members.cache.get(target.id)
+
+    const targetMember = await resolveMember(message)
     const grade = member.roles.highest.comparePositionTo(targetMember.roles.highest)
 
     //si l'auteur a les droits
@@ -20,7 +24,7 @@ module.exports = function kick(message){
             //si la cible est kickable par le bot
             if (targetMember.kickable) {
         
-                if (target) {
+                if (targetMember) {
                     targetMember.kick()
                     message.channel.send(`${tag} Cet utilisateur a été kick`)
 
@@ -39,5 +43,5 @@ module.exports = function kick(message){
 }
 
 module.exports.description = "You should kick him."
-module.exports.longDescription = "a,kick @.\nvous permet de kick un membre, il sera plus tard possible de kick une personne sans la ping."
+module.exports.longDescription = "a,kick *nom de la personne* \nVous permet de kick un membre. \nSi le bot ne trouve pas de personne à kick, essayer de ping !"
 module.exports.aliases = ['expulse', 'expluser']
