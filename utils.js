@@ -16,9 +16,6 @@ module.exports.forFiles = async function(pathList,callback) {
   }
 }
 
-module.exports.tag = member => `${member}`
-//const { tag } = require("./utils.js")
-
 module.exports.invitation = function (guild) {
   return guild.fetchInvites().then(guildInvites => {
       let valides = guildInvites.filter(invite => {
