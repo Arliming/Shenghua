@@ -2,7 +2,8 @@
   "dependencies": {
     "discord-eval.js": "^1.0.10",
     "discord.js": "^12.4.1",
-    "godembed": "^1.0.4"
+    "godembed": "^1.0.4",
+    "moment": "^2.29.1"
   },
   "main": "index.js",
   "scripts": {

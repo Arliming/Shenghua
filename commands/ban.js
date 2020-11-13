@@ -3,7 +3,7 @@ const { resolveMember } = require("../utils")
 
 module.exports = async function ban(message){
 
-    const {member, mentions} = message
+    const { member } = message
 
     const tag = `<@${member.id}>`
 
