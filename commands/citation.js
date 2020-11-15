@@ -23,4 +23,4 @@ module.exports = function citation(message) {
 }
 
 module.exports.description = "Dis une citation aléatoirement"
-module.exports.longDescription = "Les citations sont soit intelligentes, soit drôles, soit incensées \nSi vous en comprenez pas une citation, il y a des refs un peu obscure sur des jeux ou des gens ^^"
+module.exports.longDescription = "Les citations sont soit intelligentes, soit drôles, soit incensées. \nSi vous ne comprenez pas une citation, il y a des refs un peu obscures sur des jeux ou des gens ^^"

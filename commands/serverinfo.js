@@ -72,3 +72,6 @@ module.exports = async function serverinfo(message) {
 
     message.channel.send(embed)
 }
+
+module.exports.description = "Affiche différente statistique sur le discord"
+module.exports.aliases = ['IS', 'infoserveur', 'guild']
