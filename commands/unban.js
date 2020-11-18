@@ -1,44 +1,28 @@
-const Discord = require("discord.js")
+const banned = await message.guild.fetchBans()
 
-module.exports = async function unban(message) {
+module.exports = new Akairo.Command(
+    "unban",
+    async function (message) {
 
-    const {member, mentions} = message
-    
-    const banned = await message.guild.fetchBans()
+        if(/^\d+$/.test(message.content)) {
 
-    if(/^\d+$/.test(message.content)) {
-
-        if(banned.has(message.content)) {
-
-            if (
-                member.hasPermission('ADMINISTRATOR') ||
-                member.hasPermission('BAN_MEMBERS')
-            ) {
-
-                if (
-                message.guild.me.hasPermission('ADMINISTRATOR') ||
-                message.guild.me.hasPermission('BAN_MEMBERS')
-                ) {
-                    const user = banned.get(message.content).user
-                    await message.guild.members.unban(user)
-                    message.channel.send(`${user} a été unban`)
-                }
-
-                else {
-                message.reply("Je n'ai pas la permission !")
-                }
-
+            if(banned.has(message.content)) {
+                
+                const user = banned.get(message.content).user
+                await message.guild.members.unban(user)
+                await message.channel.send(`${user} a été unban`)
+                       
             } else {
-            message.reply("Vous n'avez pas la permission !")
-    
+                await message.channel.send("Je ne trouve pas cette personne")
             }
         } else {
-            message.reply("Je ne trouve pas cette personne")
+            await message.channel.send("Indiquez un ID")
         }
-    } else {
-        message.reply("Indiquez un ID")
-    }
-}
+    },
 
-module.exports.description = "Unban un utilisateur"
-module.exports.longDescription = "il faut un ID pour unban \na,unban *id de la personne*"
+    {
+        description:"a,unban *id de la personne*",
+        clientPermissions: "BAN_MEMBERS",
+        userPermissions: "BAN_MEMBERS",
+    }
+)

@@ -1,11 +1,8 @@
-const Discord = require("discord.js")
-const { resolveMember } = require("../utils")
-
-module.exports = async function avatar(message) {
-    const member = await resolveMember(message)
+module.exports = new Akairo.Command(
+  "avatar",
+  async function (message, { member }) {
   
-    const embed = new Discord.MessageEmbed()
-  
+    const embed = this.embed()
       .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
       .setTitle("Voici l'avatar de " + member.user.username)
       .setAuthor(
@@ -14,9 +11,15 @@ module.exports = async function avatar(message) {
       )
       .setImage(member.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
-    message.channel.send(embed)
-  }
 
-module.exports.description = "Voir l'avatar d'un membre"
-module.exports.longDescription = "a,avatar ***pseudo***\nvous permet de voir l'avatar d'un membre. \nsi vous ne préciser pas de membre, il montre votre avatar"
-module.exports.aliases = ['pdp', 'pp']
+    await message.channel.send(embed)
+    await message.delete()
+  },
+  {
+    aliases: ['pdp', 'pp'],
+    args: [{
+      id: "member",
+      type: "member"
+    }]
+  }
+)
