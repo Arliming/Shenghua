@@ -1,11 +1,10 @@
 const Discord = require("discord.js")
 const Akairo = require("discord-akairo")
 
-const client = new Discord.Client()
-const akairo = new Akairo.Framework(client, {
-  ownerID: "ID",
+const akairo = new Akairo.AkairoClient( {
+  ownerID: "308540889754501120",
   prefix: "a,",
-  commandDirectory: "./commands/",
+  commandDirectory: "./commands",
 })
 
 akairo.login(require("./token.json")).then(() => {
