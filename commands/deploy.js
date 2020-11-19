@@ -1,5 +1,5 @@
 const { Command } = require("discord-akairo")
-cosnt exec = require("util")
+const exec = require("util")
   .promisify(require("child_process").exec)
 
 module.exports = class extends Command {
