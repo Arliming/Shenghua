@@ -8,6 +8,13 @@
   },
   "main": "index.js",
   "scripts": {
+    "prettier": "prettier --write commands index.js package.json",
     "deploy": "git pull && npm i && pm2 restart shen && pm2 save"
+  },
+  "devDependencies": {
+    "prettier": "^2.1.2"
+  },
+  "prettier": {
+    "semi": false
   }
 }

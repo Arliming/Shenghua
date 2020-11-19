@@ -12,17 +12,17 @@ const citations = [
   "Les voix du seigneur sont impénétrables.",
   "Les hommes sont toujours sincères. Ils changent de sincérité voilà tout.",
   "Un bon mari ne se souvient jamais de l'âge de sa femme mais de son anniversaire.",
-  "Il vaut mieux mobiliser son intelligence sur des conneries que mobiliser sa connerie sur des choses intelligentes."   
+  "Il vaut mieux mobiliser son intelligence sur des conneries que mobiliser sa connerie sur des choses intelligentes.",
 ]
 
 module.exports = new Akairo.Command(
-    "citation",
-    async function (message) {
-    
-      await message.channel.send(citations[Math.floor(Math.random() * citations.length)])
-      
-    },
-    {
-      description: "Dis une citation aléatoirement",
-    }
-  )
+  "citation",
+  async function (message) {
+    await message.channel.send(
+      citations[Math.floor(Math.random() * citations.length)]
+    )
+  },
+  {
+    description: "Dis une citation aléatoirement",
+  }
+)

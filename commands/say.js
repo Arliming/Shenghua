@@ -4,11 +4,11 @@ module.exports = new Akairo.Command(
     let said = message.content || "Bite"
 
     await message.channel.send(`${said}`)
-  
+
     await message.delete()
   },
 
   {
-    aliases: ["dis", "dire","parle"],
+    aliases: ["dis", "dire", "parle"],
   }
 )

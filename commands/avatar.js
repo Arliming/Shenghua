@@ -1,7 +1,6 @@
 module.exports = new Akairo.Command(
   "avatar",
   async function (message, { member }) {
-  
     const embed = this.embed()
       .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
       .setTitle("Voici l'avatar de " + member.user.username)
@@ -16,10 +15,12 @@ module.exports = new Akairo.Command(
     await message.delete()
   },
   {
-    aliases: ['pdp', 'pp'],
-    args: [{
-      id: "member",
-      type: "member"
-    }]
+    aliases: ["pdp", "pp"],
+    args: [
+      {
+        id: "member",
+        type: "member",
+      },
+    ],
   }
 )

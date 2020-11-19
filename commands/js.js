@@ -9,5 +9,6 @@ module.exports = new Akairo.Command(
   {
     aliases: ["eval", "code", "run"],
     ownerOnly: true,
+    category: "administrator"
   }
 )

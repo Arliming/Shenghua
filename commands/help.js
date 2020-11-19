@@ -1,34 +1,87 @@
-const Discord = require("discord.js")
-const path = require("path")
+const { stripIndents } = require("common-tags")
+const { Command } = require("discord-akairo")
+const { MessageEmbed } = require("discord.js")
 
-module.exports = function help(message){
-  if(message.content){
-    const command = message.client.findCommand(message.content)
-    
-    if(!command) return message.channel.send("unknown command...")
-    
-    const embed = new Discord.MessageEmbed()
-      .setTitle(`Command: ${command.name}`)
-      .setDescription(
-        command.longDescription ?? 
-        command.description ?? 
-        "Pas de description."
-      )
-      
-    const aliases = command.aliases ?? []
-    
-    if(aliases.length > 0){
-      embed.addField("aliases", aliases.join(", "))
+class HelpCommand extends Command {
+  constructor() {
+    super("help", {
+      aliases: ["help", "h"],
+      args: [
+        {
+          id: "command",
+          type: "commandAlias",
+          default: null,
+        },
+      ],
+      category: "util",
+      description: {
+        content: "Donne une information à propos d'une commande",
+        usage: "[command]",
+        examples: ["ping"],
+      },
+    })
+  }
+
+  exec(message, { command }) {
+    const prefix = this.handler.prefix
+    const embed = new MessageEmbed().setColor(0x6577b7)
+
+    if (command) {
+      embed
+        .setColor(3447003)
+        .addField(
+          "❯ Usage",
+          `\`${command.aliases[0]} ${
+            command.description.usage ? command.description.usage : ""
+          }\``
+        )
+        .addField(
+          "❯ Description",
+          command.description.content || "No Description provided"
+        )
+
+      if (command.aliases.length > 1) {
+        embed.addField("❯ Aliases", `\`${command.aliases.join("`, `")}\``)
+      }
+      if (command.description.examples && command.description.examples.length) {
+        embed.addField(
+          "❯ Examples",
+          `\`${command.aliases[0]} ${command.description.examples.join(
+            `\`\n\`${command.aliases[0]} `
+          )}\``
+        )
+      }
+    } else {
+      embed
+        .setTitle("❯ Commands")
+        .setDescription(
+          stripIndents`
+					A list of available commands.
+					For additional info on a command, type \`${prefix}help <command>\`
+					<> mean required, [] mean optional
+					Numbers represent modules
+					`
+        )
+        .setFooter(
+          `${this.handler.modules.size} Modules`,
+          this.client.user.displayAvatarURL()
+        )
+
+      for (const category of this.handler.categories.values()) {
+        embed.addField(
+          `❯ ${category.id.replace(/(\b\w)/gi, (lc) => lc.toUpperCase())} - ${
+            category.size
+          }`,
+          `${category
+            .filter((cmd) => cmd.aliases.length > 0)
+            .map((cmd) => `\`${cmd.aliases[0]}\``)
+            .join(", ")}`
+        )
+      }
     }
-    
-    message.channel.send(embed)
-  }else{
-    message.channel.send(
-      message.client.commands.map((cmd, cmdName) => {
-        return `${message.client.prefix}${cmdName} - ${cmd.description ?? "pas de description"}`
-      }).join("\n")
-    )
+
+    return message.util.send(embed)
   }
 }
 
-module.exports.description = "a,help ***nom de la commande***"
+module.exports = HelpCommand
