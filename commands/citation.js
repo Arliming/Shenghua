@@ -1,3 +1,4 @@
+const Akairo = require("discord-akairo")
 const citations = [
   "Un argument extraordinaire avancé sans preuve, peut être rejeté sans preuve !",
   "C'est méchant d'être méchant.",

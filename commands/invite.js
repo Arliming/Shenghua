@@ -1,3 +1,4 @@
+const Akairo = require("discord-akairo")
 module.exports = new Akairo.Command(
   "invitation",
   async function (message) {

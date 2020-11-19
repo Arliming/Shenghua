@@ -1,3 +1,4 @@
+const Akairo = require("discord-akairo")
 const deval = require("discord-eval.js")
 
 module.exports = new Akairo.Command(

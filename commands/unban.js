@@ -1,3 +1,4 @@
+const Akairo = require("discord-akairo")
 const banned = await message.guild.fetchBans()
 
 module.exports = new Akairo.Command(
