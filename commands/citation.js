@@ -1,4 +1,3 @@
-const Akairo = require("discord-akairo")
 const citations = [
   "Un argument extraordinaire avancé sans preuve, peut être rejeté sans preuve !",
   "C'est méchant d'être méchant.",
@@ -16,14 +15,25 @@ const citations = [
   "Il vaut mieux mobiliser son intelligence sur des conneries que mobiliser sa connerie sur des choses intelligentes.",
 ]
 
-module.exports = new Akairo.Command(
-  "citation",
-  async function (message) {
+const { Command } = require("discord-akairo")
+
+class Cmdcit extends Command {
+  constructor() {
+    super("citation", {
+      aliases: ["citation", "citations"],
+      channel: "guild",
+      category: "Fun",
+      description: {
+        content: "Dit une citation drôle ou intelligente aléatoirement",
+      },
+    })
+  }
+
+  async exec(message) {
     await message.channel.send(
       citations[Math.floor(Math.random() * citations.length)]
     )
-  },
-  {
-    description: "Dis une citation aléatoirement",
   }
-)
+}
+
+module.exports = Cmdcit

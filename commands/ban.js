@@ -3,15 +3,15 @@ const { Command } = require("discord-akairo")
 class CmdBan extends Command {
   constructor() {
     super("ban", {
-    clientPermissions: "BAN_MEMBERS",
-    userPermissions: "BAN_MEMBERS",
-    args: [
-      {
-        id: "member",
-        type: "member",
-        otherwise: "Donne un membre valide",
-      },
-    ],
+      clientPermissions: "BAN_MEMBERS",
+      userPermissions: "BAN_MEMBERS",
+      args: [
+        {
+          id: "member",
+          type: "member",
+          otherwise: "Donne un membre valide",
+        },
+      ],
       aliases: ["ban"],
       category: "Modération",
       description: {
@@ -23,10 +23,10 @@ class CmdBan extends Command {
   }
 
   async exec(message, { member }) {
-    const grade = message.member.roles.highest.comparePositionTo(member.roles.highest)
-    if (
-      grade > 0
-    ) {
+    const grade = message.member.roles.highest.comparePositionTo(
+      member.roles.highest
+    )
+    if (grade > 0) {
       if (member.bannable) {
         if (member) {
           await member.ban()
@@ -38,7 +38,9 @@ class CmdBan extends Command {
         await message.channel.send("Je ne possède pas la permission :/")
       }
     } else {
-      await message.channel.send("Cette fois-ci c'est non ! \nFini la guéguerre entre le staff <:A_MaePolice:767726955637243966>")
+      await message.channel.send(
+        "**Cette fois-ci c'est non !** \nFini la guéguerre entre le staff <:A_MaePolice:767726955637243966>"
+      )
     }
   }
 }
