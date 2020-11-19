@@ -1,12 +1,27 @@
-module.exports = function say(message){
+const { Command } = require("discord-akairo")
 
-  let said = message.content || "Bite"
+class CmdSay extends Command {
+  constructor() {
+    super("say", {
+      aliases: ["say", "dis", "dire", "parle"],
+      category: "Fun",
+      description: {
+        content: "Dis ce que vous souhaitez",
+        usage: "[message]",
+        examples: ["Bonjour !"],
+      },
+    })
+  }
 
-  message.channel.send(`${said}`)
+  async exec(message) {
+    const { prefix, alias } = message.util.parsed
 
-  message.delete()
+    const said = message.content.slice((prefix + alias).length) || "Bite"
+
+    await message.channel.send(`${said}`)
+
+    await message.delete()
+  }
 }
 
-module.exports.description = "Dit ce que vous souhaitez"
-module.exports.longDescription = "Le bot peut dire tout, même les emojis animé (seulement celles présentes dans un discord où le bot est présent). Si vous n'écrivez rien, le bot dira ***Bite***"
-module.exports.aliases = ['dis', 'dire']
+module.exports = CmdSay

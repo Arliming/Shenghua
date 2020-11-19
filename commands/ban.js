@@ -1,46 +1,48 @@
-const Discord = require("discord.js")
-const { resolveMember } = require("../utils")
+const { Command } = require("discord-akairo")
 
-module.exports = async function ban(message){
+class CmdBan extends Command {
+  constructor() {
+    super("ban", {
+      clientPermissions: "BAN_MEMBERS",
+      userPermissions: "BAN_MEMBERS",
+      args: [
+        {
+          id: "member",
+          type: "member",
+          otherwise: "Donne un membre valide",
+        },
+      ],
+      aliases: ["ban"],
+      category: "Modération",
+      description: {
+        content: "Ban un utilisateur",
+        usage: "[pseudo]",
+        examples: ["Mee6"],
+      },
+    })
+  }
 
-    const { member } = message
-
-    const tag = `<@${member.id}>`
-
-    const targetMember = await resolveMember(message)
-    const grade = member.roles.highest.comparePositionTo(targetMember.roles.highest)
-
-    //si l'auteur a les droits
-    if (
-        member.hasPermission('ADMINISTRATOR') ||
-        member.hasPermission('BAN_MEMBERS')
-    ) {
-
-        //si l'auteur est high rank
-        if (
-            grade > 0
-        ) {
-
-            //si la cible est kickable par le bot
-            if (targetMember.bannable) {
-        
-                if (targetMember) {
-                    targetMember.ban()
-                    message.channel.send(`${tag} Cet utilisateur a été ban`)
-
-                } else {
-                    message.channel.send(`${tag} Précise qui tu veux ban ?`)
-                }
-            } else {
-                message.channel.send(`${tag} Je ne possède pas la permission :/`)
-            }
+  async exec(message, { member }) {
+    const grade = message.member.roles.highest.comparePositionTo(
+      member.roles.highest
+    )
+    if (grade > 0) {
+      if (member.bannable) {
+        if (member) {
+          await member.ban()
+          await message.channel.send("Cet utilisateur a été ban")
         } else {
-            message.channel.send(`${tag} Vous ne pouvez pas ban un utilisateur plus haut gradé ou du même grade que vous !`)
+          await message.channel.send("Précise qui tu veux ban ?")
         }
+      } else {
+        await message.channel.send("Je ne possède pas la permission :/")
+      }
     } else {
-        message.channel.send(`${tag} Vous n'avez pas les permissions !`)
+      await message.channel.send(
+        "**Cette fois-ci c'est non !** \nFini la guéguerre entre le staff <:A_MaePolice:767726955637243966>"
+      )
     }
+  }
 }
 
-module.exports.description = "You should ban him."
-module.exports.longDescription = "a,ban *nom de la personne* \nVous permet de kick un membre. \nSi le bot ne trouve pas de personne à ban, essayer de ping !"
+module.exports = CmdBan

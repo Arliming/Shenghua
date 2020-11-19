@@ -1,19 +1,34 @@
-const Discord = require("discord.js")
+const { Command } = require("discord-akairo")
+const { MessageEmbed } = require("discord.js")
 
-module.exports = function invite(message, member){
+class CmdInvit extends Command {
+  constructor() {
+    super("invitation", {
+      aliases: ["invitation", "invite", "link"],
+      category: "Util",
+      description: {
+        content: "Envoie le lien d'invitation du bot",
+      },
+    })
+  }
 
-    const embed = new Discord.MessageEmbed()
-
+  async exec(message) {
+    const embed = new MessageEmbed()
       .setTitle("Voici le lien d'invitation de Shēnghuá")
-      .setDescription("[>>Invite moi<<](https://discord.com/oauth2/authorize?client_id=770769340693217281&scope=bot&permissions=8)")
+      .setDescription(
+        "[>>Invite moi<<](https://discord.com/oauth2/authorize?client_id=770769340693217281&scope=bot&permissions=8)"
+      )
       .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
-      .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+      .setAuthor(
+        message.author.tag,
+        message.author.displayAvatarURL({ dynamic: true })
+      )
       .setThumbnail(message.client.user.displayAvatarURL({ dynamic: true }))
-      .setTimestamp();
+      .setTimestamp()
 
-    message.channel.send(embed)
-    message.delete()
+    await message.channel.send(embed)
+    await message.delete()
+  }
 }
 
-module.exports.description = "Lien d'invitation du bot"
-module.exports.aliases = ['invitation']
+module.exports = CmdInvit

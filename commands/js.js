@@ -1,13 +1,25 @@
 const deval = require("discord-eval.js")
+const { Command } = require("discord-akairo")
 
-module.exports = function js(message) {
-  if(
-    message.author.id !== "308540889754501120" && 
-    message.author.id !== "352176756922253321"
-  ) return;
-  deval(message.content, message).catch(console.error)
+class JSeval extends Command {
+  constructor() {
+    super("js", {
+      aliases: ["js", "run", "eval"],
+      ownerOnly: true,
+      category: "secret",
+      description: {
+        content: "Run un code js",
+        usage: "[code]",
+        examples: ["return 1+1"],
+      },
+    })
+  }
+
+  exec(message) {
+    const { prefix, alias } = message.util.parsed
+    const code = message.content.slice((prefix + alias).length)
+    return deval(code, message)
+  }
 }
 
-module.exports.aliases = ["eval", "code", "run"]
-
-module.exports.description = "Execute du Javascript (ADMINISTRATOR)"
+module.exports = JSeval

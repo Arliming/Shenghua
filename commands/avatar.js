@@ -1,22 +1,40 @@
-const Discord = require("discord.js")
-const { resolveMember } = require("../utils")
+const { Command } = require("discord-akairo")
+const { MessageEmbed } = require("discord.js")
 
-module.exports = async function avatar(message) {
-    const member = await resolveMember(message)
-  
-    const embed = new Discord.MessageEmbed()
-  
+class CmdAvatar extends Command {
+  constructor() {
+    super("avatar", {
+      args: [
+        {
+          id: "member",
+          type: "member",
+          otherwise: "lul",
+        },
+      ],
+      channel: "guild",
+      aliases: ["avatar", "pdp", "pp"],
+      category: "Fun",
+      description: {
+        content: "Affiche l'avatar d'un membre",
+        usage: "[pseudo]",
+        examples: ["Mee6"],
+      },
+    })
+  }
+
+  async exec(message, { member }) {
+    const embed = new MessageEmbed()
       .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
-      .setTitle("Voici l'avatar de " + member.user.username)
+      .setTitle("Voici l'avatar de " + member.displayName)
       .setAuthor(
         message.author.tag,
         message.author.displayAvatarURL({ dynamic: true })
       )
       .setImage(member.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
-    message.channel.send(embed)
+    await message.channel.send(embed)
+    await message.delete()
   }
+}
 
-module.exports.description = "Voir l'avatar d'un membre"
-module.exports.longDescription = "a,avatar ***pseudo***\nvous permet de voir l'avatar d'un membre. \nsi vous ne préciser pas de membre, il montre votre avatar"
-module.exports.aliases = ['pdp', 'pp']
+module.exports = CmdAvatar
