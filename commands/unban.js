@@ -1,9 +1,11 @@
 const Akairo = require("discord-akairo")
-const banned = await message.guild.fetchBans()
 
 module.exports = new Akairo.Command(
   "unban",
   async function (message) {
+    
+    const banned = await message.guild.fetchBans()
+
     if (/^\d+$/.test(message.content)) {
       if (banned.has(message.content)) {
         const user = banned.get(message.content).user

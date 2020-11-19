@@ -1,8 +1,19 @@
-const Akairo = require("discord-akairo")
-module.exports = new Akairo.Command(
-  "invitation",
-  async function (message) {
-    const embed = this.embed()
+const { Command } = require("discord-akairo")
+const { MessageEmbed } = require("discord.js")
+
+class CmdInvit extends Command {
+  constructor() {
+    super("invitation", {
+      aliases: ["invitation", "invite", "link"],
+      category: "Util",
+      description: {
+        content: "Envoie le lien d'invitation du bot",
+      },
+    })
+  }
+
+  async exec(message) {
+    const embed = new MessageEmbed()
       .setTitle("Voici le lien d'invitation de Shēnghuá")
       .setDescription(
         "[>>Invite moi<<](https://discord.com/oauth2/authorize?client_id=770769340693217281&scope=bot&permissions=8)"
@@ -17,8 +28,7 @@ module.exports = new Akairo.Command(
 
     await message.channel.send(embed)
     await message.delete()
-  },
-  {
-    aliases: ["invite", "link"],
   }
-)
+}
+
+module.exports = CmdInvit

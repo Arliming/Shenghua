@@ -13,7 +13,7 @@ class HelpCommand extends Command {
           default: null,
         },
       ],
-      category: "util",
+      category: "Util",
       description: {
         content: "Donne une information à propos d'une commande",
         usage: "[command]",
@@ -24,7 +24,7 @@ class HelpCommand extends Command {
 
   exec(message, { command }) {
     const prefix = this.handler.prefix
-    const embed = new MessageEmbed().setColor(0x6577b7)
+    const embed = new MessageEmbed().setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
 
     if (command) {
       embed
@@ -80,7 +80,7 @@ class HelpCommand extends Command {
       }
     }
 
-    return message.util.send(embed)
+    return message.channel.send(embed)
   }
 }
 
