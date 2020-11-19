@@ -9,7 +9,7 @@ module.exports = class extends Command {
       channel: "guild",
       cooldown: 1000 * 60 * 5,
       aliases: ["deploy", "reload"],
-      category: "Secret",
+      category: "secret",
       description: "Déploie en production le dernier push",
     })
   }
@@ -23,11 +23,10 @@ module.exports = class extends Command {
     try {
       await exec("git pull && npm i")
       await subject.edit(
-        `Déploiement réussi ! <:yay:557124850326437888>\n*Effectué en ${
+        `Déploiement réussi ! <:yay:557124850326437888>\nEffectué en ${
           Date.now() - timer
-        }ms*`
+        }ms`
       )
-      app.globals.set("helloChannel", message.channel.id)
       process.exit(0)
     } catch (error) {
       await subject.edit(
