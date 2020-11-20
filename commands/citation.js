@@ -13,7 +13,9 @@ const citations = [
   "Les hommes sont toujours sincères. Ils changent de sincérité voilà tout.",
   "Un bon mari ne se souvient jamais de l'âge de sa femme mais de son anniversaire.",
   "Il vaut mieux mobiliser son intelligence sur des conneries que mobiliser sa connerie sur des choses intelligentes.",
-]
+  "https://cdn.discordapp.com/attachments/674863537142890517/779383409696047135/telecharge.jpg",
+  "const modernProblems = require('modernSolutions')",
+];
 
 const { Command } = require("discord-akairo")
 

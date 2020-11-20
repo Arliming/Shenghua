@@ -39,7 +39,7 @@ class HelpCommand extends Command {
         )
         .addField(
           "❯ Description",
-          command.description.content || "No Description provided"
+          command.description.content || "Pas de Description"
         )
 
       if (command.aliases.length > 1) {
@@ -47,7 +47,7 @@ class HelpCommand extends Command {
       }
       if (command.description.examples && command.description.examples.length) {
         embed.addField(
-          "❯ Examples",
+          "❯ Exemple",
           `\`${command.aliases[0]} ${command.description.examples.join(
             `\`\n\`${command.aliases[0]} `
           )}\``
@@ -55,17 +55,16 @@ class HelpCommand extends Command {
       }
     } else {
       embed
-        .setTitle("❯ Commands")
+        .setTitle("❯ Commandes")
         .setDescription(
           stripIndents`
-					A list of available commands.
-					For additional info on a command, type \`${prefix}help <command>\`
-					<> mean required, [] mean optional
-					Numbers represent modules
+					Une liste des commandes disponnibles
+					Pour plus d'infos sur une commande, \`${prefix}help *nom de la commande*\
+					Le nombre représente le nombre de commande !
 					`
         )
         .setFooter(
-          `${this.handler.modules.size} Modules`,
+          `${this.handler.modules.size} Commandes`,
           this.client.user.displayAvatarURL()
         )
 
