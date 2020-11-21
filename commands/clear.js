@@ -1,4 +1,4 @@
-const { Command } = require("discord-akairo")
+const { Command, Argument } = require("discord-akairo")
 const db = require("../db.js")
 
 module.exports = class extends Command {
@@ -13,15 +13,14 @@ module.exports = class extends Command {
         content: "permet de supprimer un nombre de message",
         usage: "[nombre de message]",
         examples: "5",
-        args: [
-          {
-            id: "deleteAmount",
-            type: "number",
-            min: 1,
-            max: 100,
-          },
-        ],
       },
+      args: [
+        {
+          id: "deleteAmount",
+          type: Argument.range("number", 1, 99),
+          default: 1,
+        },
+        ],
     })
   }
 
@@ -32,6 +31,6 @@ module.exports = class extends Command {
     const msg = await message.channel.send(
       `${deleted.size - 1} messages purged!`
     )
-    await msg.delete({ timeout: 5000 })
+    await msg.delete({ timeout: 4000 })
   }
 }
