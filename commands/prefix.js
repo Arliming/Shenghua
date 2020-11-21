@@ -4,6 +4,7 @@ const db = require("../db.js")
 module.exports = class extends Command {
   constructor() {
     super("prefix", {
+      userPermissions: "MANAGE_MESSAGES",
       cooldown: 5000,
       aliases: ["prefix", "pfx"],
       channel: "guild",
