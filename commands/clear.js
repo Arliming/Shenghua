@@ -19,14 +19,14 @@ module.exports = class extends Command {
           id: "deleteAmount",
           type: Argument.range("number", 1, 99),
           default: 1,
+          otherwise: "Le nombre n'est pas valide (min: 1, max: 99)",
         },
-        ],
+      ],
     })
   }
 
   async exec(message, { deleteAmount }) {
-    deleteAmount = deleteAmount ?? 1
-    deleteAmount ++
+    deleteAmount++
     const deleted = await message.channel.bulkDelete(deleteAmount)
     const msg = await message.channel.send(
       `${deleted.size - 1} messages purged!`

@@ -24,6 +24,6 @@ module.exports = class extends Command {
 
   async exec(message, { newPrefix }) {
     await db.prefixes.set(message.guild.id, newPrefix)
-    return message.util.send("Prefix mis à jour \n> " + newPrefix)
+    return message.util.send("**Prefix mis à jour :** \n> " + newPrefix)
   }
 }
