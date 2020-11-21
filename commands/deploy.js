@@ -20,7 +20,7 @@ module.exports = class extends Command {
     const timer = Date.now()
 
     try {
-      await exec("git pull && npm i")
+      await exec("git reset --hard && git pull && npm i")
       await subject.edit(
         `Déploiement réussi ! <:yay:557124850326437888>\nEffectué en ${
           Date.now() - timer
