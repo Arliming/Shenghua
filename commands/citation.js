@@ -1,41 +1,55 @@
-const citations = [
-  "Un argument extraordinaire avancé sans preuve, peut être rejeté sans preuve !",
-  "C'est méchant d'être méchant.",
-  "Un argument irréfutable n'est pas un argument valable.",
-  "Le destin est un vent fort qui nous oblige à adapter notre voilure, mieux vaut être un marin vigoureux qu'une mouette folle !",
-  "Mon pied droit est jaloux de mon pied gauche. Quand l'un avance, l'autre veut le dépasser. Et moi, comme un imbécile, je marche !",
-  "Il vaut mieux se taire et passer pour un con plutôt que de parler et de ne laisser aucun doute sur le sujet.",
-  "Individualiste jusqu'au bout, redeviens mon pote stp.",
-  "Tu peux voler une coco sans te faire ban si c'est toi le gm <:A_Zenitsu_Dab:765931200891846686>",
-  "Je suis obèse et je vous baise !?",
-  "Je vous le jure, sur le Corail de la Mer !",
-  "Les voix du seigneur sont impénétrables.",
-  "Les hommes sont toujours sincères. Ils changent de sincérité voilà tout.",
-  "Un bon mari ne se souvient jamais de l'âge de sa femme mais de son anniversaire.",
-  "Il vaut mieux mobiliser son intelligence sur des conneries que mobiliser sa connerie sur des choses intelligentes.",
-  "https://cdn.discordapp.com/attachments/674863537142890517/779383409696047135/telecharge.jpg",
-  "const modernProblems = require('modernSolutions')",
-];
-
 const { Command } = require("discord-akairo")
+const db = require("../db.js")
 
-class Cmdcit extends Command {
+module.exports = class extends Command {
   constructor() {
     super("citation", {
+      cooldown: 5000,
       aliases: ["citation", "citations"],
       channel: "guild",
       category: "Fun",
       description: {
-        content: "Dit une citation drôle ou intelligente aléatoirement",
+        content:
+          "Dit une citation drôle ou intelligente aléatoirement (cooldown de 5s)",
       },
+      args: [
+        {
+          id: "citation",
+          type: "text",
+          default: null,
+        },
+      ],
     })
   }
 
-  async exec(message) {
-    await message.channel.send(
-      citations[Math.floor(Math.random() * citations.length)]
-    )
+  async exec(message, { citation }) {
+    if (citation) {
+      if (citation === "list") {
+        const citations = await db.globals.ensure("citations", [])
+        return message.util.send(
+          `${citations.length} citations.\n${citations
+            .map((c) => "> " + c)
+            .join("\n\n")}`
+        )
+      } else {
+        if (message.author.id === "308540889754501120") {
+          await db.globals.push("citations", citation)
+          return message.util.send(
+            "Nouvelle citation ajoutée c: \n> " + citation
+          )
+        } else {
+          return message.util.send("T'es pas ma mère eh oh D:")
+        }
+      }
+    } else {
+      const citations = await db.globals.ensure("citations", [])
+      if (citations.length > 0) {
+        return message.util.send(
+          "> " + citations[Math.floor(Math.random() * citations.length)]
+        )
+      } else {
+        return message.util.send("Je ne connais pas de citation...")
+      }
+    }
   }
 }
-
-module.exports = Cmdcit

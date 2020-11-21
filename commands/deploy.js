@@ -1,6 +1,5 @@
 const { Command } = require("discord-akairo")
-const exec = require("util")
-  .promisify(require("child_process").exec)
+const exec = require("util").promisify(require("child_process").exec)
 
 module.exports = class extends Command {
   constructor() {
@@ -13,8 +12,8 @@ module.exports = class extends Command {
       description: "Déploie en production le dernier push",
     })
   }
-  
-  async exec(message){
+
+  async exec(message) {
     const subject = await message.channel.send(
       "<a:wait:560972897376665600> En cours de déploiement..."
     )
