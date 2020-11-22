@@ -1,14 +1,13 @@
-const { Command } = require("discord-akairo")
+const { Command, Argument } = require("discord-akairo")
 const { MessageEmbed } = require("discord.js")
 
-class CmdAvatar extends Command {
+module.exports = class extends Command {
   constructor() {
     super("avatar", {
       args: [
         {
-          id: "member",
-          type: "member",
-          otherwise: "lul",
+          id: "target",
+          type: Argument.union("member", "user", "relevant", "text")
         },
       ],
       channel: "guild",
@@ -22,19 +21,30 @@ class CmdAvatar extends Command {
     })
   }
 
-  async exec(message, { member }) {
+  async exec(message, { target }) {
+    let user
+    if(typeof target === "string"){
+      user = await message.client.users.fetch(target)
+    }else{
+      user = target?.user ?? target
+    }
+    if(!user) user = message.author
+
     const embed = new MessageEmbed()
       .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
-      .setTitle("Voici l'avatar de " + member.displayName)
+      .setTitle("Voici l'avatar de " + user.username)
       .setAuthor(
         message.author.tag,
         message.author.displayAvatarURL({ dynamic: true })
       )
-      .setImage(member.user.displayAvatarURL({ dynamic: true }))
+      .setImage(
+        user.displayAvatarURL({
+          dynamic: true,
+          size: 256,
+        })
+      )
       .setTimestamp()
     await message.channel.send(embed)
     await message.delete()
   }
 }
-
-module.exports = CmdAvatar

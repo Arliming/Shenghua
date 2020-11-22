@@ -3,6 +3,7 @@ const { AkairoClient, CommandHandler } = require("discord-akairo")
 
 const client = new AkairoClient({
   ownerID: ["308540889754501120", "352176756922253321"],
+  disableMentions: "everyone",
 })
 client.commandHandler = new CommandHandler(client, {
   directory: "./commands/",
@@ -11,6 +12,7 @@ client.commandHandler = new CommandHandler(client, {
     return db.prefixes.ensure(guild.id, "a,")
   },
   commandUtil: true,
+  fetchMembers: true,
 })
 
 client.commandHandler.loadAll()
