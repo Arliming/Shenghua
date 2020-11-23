@@ -24,7 +24,6 @@ class HelpCommand extends Command {
   }
 
   exec(message, { command }) {
-    const prefix = this.handler.prefix
     const embed = new MessageEmbed().setColor(
       message.guild?.me.roles.color?.color ?? "#c800ff"
     )

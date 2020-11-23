@@ -1,15 +1,14 @@
 const { Command } = require("discord-akairo")
 
-class CmdKick extends Command {
+module.exports = class extends Command {
   constructor() {
     super("kick", {
       clientPermissions: "KICK_MEMBERS",
       userPermissions: "KICK_MEMBERS",
       args: [
         {
-          id: "member",
-          type: "member",
-          otherwise: "Donne un membre valide",
+          id: "target",
+          type: Argument.union("member", "user", "relevant", "text")
         },
       ],
       aliases: ["kick", "expulse"],
@@ -22,15 +21,26 @@ class CmdKick extends Command {
     })
   }
 
-  async exec(message, { member }) {
-    const grade = message.member.roles.highest.comparePositionTo(
-      member.roles.highest
+  async exec(message, { target }) {
+    let user
+    if(typeof target === "string"){
+      try {
+      user = await message.client.users.fetch(target)
+      }catch(err){
+        user = null
+      }
+    }else{
+      user = target?.user ?? target
+    }
+
+    const grade = message.user.roles.highest.comparePositionTo(
+      user.roles.highest
     )
     if (grade > 0) {
-      if (member.kickable) {
-        if (member) {
-          await member.kick()
-          await message.channel.send("Cet utilisateur a été kick")
+      if (user.kickable) {
+        if (user) {
+          await user.kick()
+          await message.channel.send(`${user.username} a été kick`)
         } else {
           await message.channel.send("Précise qui tu veux kick ?")
         }
@@ -44,5 +54,3 @@ class CmdKick extends Command {
     }
   }
 }
-
-module.exports = CmdKick
