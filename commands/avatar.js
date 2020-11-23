@@ -24,7 +24,11 @@ module.exports = class extends Command {
   async exec(message, { target }) {
     let user
     if(typeof target === "string"){
+      try {
       user = await message.client.users.fetch(target)
+      }catch(err){
+        user = null
+      }
     }else{
       user = target?.user ?? target
     }

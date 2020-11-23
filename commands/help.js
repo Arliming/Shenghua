@@ -1,4 +1,5 @@
 const { stripIndents } = require("common-tags")
+const db = require("../db.js")
 const { Command } = require("discord-akairo")
 const { MessageEmbed } = require("discord.js")
 
@@ -58,10 +59,10 @@ class HelpCommand extends Command {
         .setTitle("❯ Commandes")
         .setDescription(
           stripIndents`
-					Une liste des commandes disponnibles
-					Pour plus d'infos sur une commande, \`${prefix}help *nom de la commande*\
-					Le nombre représente le nombre de commande !
-					`
+                    Une liste des commandes disponnibles\n
+                    Pour plus d'infos sur une commande, ${await db.prefixes.ensure(message.guild.id, "a,")}help *cmd*\n
+                    Le nombre représente le nombre de commande !
+                    `
         )
         .setFooter(
           `${this.handler.modules.size} Commandes`,
