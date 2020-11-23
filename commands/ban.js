@@ -1,18 +1,17 @@
 const { Command } = require("discord-akairo")
 
-class CmdBan extends Command {
+module.exports = class extends Command {
   constructor() {
     super("ban", {
       clientPermissions: "BAN_MEMBERS",
       userPermissions: "BAN_MEMBERS",
       args: [
         {
-          id: "member",
-          type: "member",
-          otherwise: "Donne un membre valide",
+          id: "target",
+          type: Argument.union("member", "user", "relevant", "text")
         },
       ],
-      aliases: ["ban"],
+      aliases: ["ban", "banned"],
       category: "Modération",
       description: {
         content: "Ban un utilisateur",
@@ -22,15 +21,26 @@ class CmdBan extends Command {
     })
   }
 
-  async exec(message, { member }) {
-    const grade = message.member.roles.highest.comparePositionTo(
-      member.roles.highest
+  async exec(message, { target }) {
+    let user
+    if(typeof target === "string"){
+      try {
+      user = await message.client.users.fetch(target)
+      }catch(err){
+        user = null
+      }
+    }else{
+      user = target?.user ?? target
+    }
+
+    const grade = message.user.roles.highest.comparePositionTo(
+      user.roles.highest
     )
     if (grade > 0) {
-      if (member.bannable) {
-        if (member) {
-          await member.ban()
-          await message.channel.send("Cet utilisateur a été ban")
+      if (user.bannable) {
+        if (user) {
+          await user.ban()
+          await message.channel.send(`${user.username} a été ban !`)
         } else {
           await message.channel.send("Précise qui tu veux ban ?")
         }
@@ -38,11 +48,9 @@ class CmdBan extends Command {
         await message.channel.send("Je ne possède pas la permission :/")
       }
     } else {
-      await message.channel.send(
+      message.channel.send(
         "**Cette fois-ci c'est non !** \nFini la guéguerre entre le staff <:A_MaePolice:767726955637243966>"
       )
     }
   }
 }
-
-module.exports = CmdBan
