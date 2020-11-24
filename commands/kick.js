@@ -1,4 +1,4 @@
-const { Command } = require("discord-akairo")
+const { Command, Argument } = require("discord-akairo")
 
 module.exports = class extends Command {
   constructor() {
