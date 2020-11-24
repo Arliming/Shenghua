@@ -4,6 +4,7 @@ const Discord = require("discord.js")
 module.exports = class extends Command {
   constructor() {
     super("kick", {
+      channel: "guild",
       clientPermissions: "KICK_MEMBERS",
       userPermissions: "KICK_MEMBERS",
       args: [
@@ -33,7 +34,7 @@ module.exports = class extends Command {
     } else {
       user = target?.user ?? target
     }
-    if(target instanceof Discord.User) 
+    if (target instanceof Discord.User)
       target = await message.guild.members.fetch(target)
 
     const grade = await message.member
@@ -52,7 +53,7 @@ module.exports = class extends Command {
         await message.channel.send("Je ne possède pas la permission :/")
       }
     } else {
-      message.channel.send(
+      await message.channel.send(
         "**Cette fois-ci c'est non !** \nFini la guéguerre entre le staff <:A_MaePolice:767726955637243966>"
       )
     }

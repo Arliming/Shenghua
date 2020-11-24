@@ -88,6 +88,6 @@ module.exports = class extends Command {
         "\u200b",
       ])
       .setTimestamp()
-    message.channel.send(embed)
+    await message.channel.send(embed)
   }
 }
