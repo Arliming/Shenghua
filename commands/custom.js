@@ -5,14 +5,15 @@ module.exports = class extends Command {
   constructor() {
     super("custom", {
       cooldown: 5000,
-      userPermissions:"MANAGE_MESSAGES",
-      aliases: ["custom", "command", "cmd"],
+      userPermissions: "MANAGE_MESSAGES",
+      aliases: ["custom", "command", "cmd", "cc"],
       channel: "guild",
       category: "custom",
       description: {
         content:
           "permet de créer une commande custom (maximum de 10 commandes)",
-        usage: "add *nom de la cmd* *texte* \n[cmd] use *nom de la cmd* \n[cmd] list \n[cmd] remove *nom de la cmd*",
+        usage:
+          "add *nom de la cmd* *texte* \n[cmd] use *nom de la cmd* \n[cmd] list \n[cmd] remove *nom de la cmd*",
       },
       args: [
         {
@@ -67,7 +68,7 @@ module.exports = class extends Command {
     const name = regexResult.match[0]
     const command = commands.find((c) => c.name === name)
 
-    if(key !== "add" && !command){
+    if (key !== "add" && !command) {
       return message.util.send(`Aucune commande ne s'appelle ${name} :(`)
     }
 

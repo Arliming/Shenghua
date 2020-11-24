@@ -23,7 +23,7 @@ class HelpCommand extends Command {
     })
   }
 
-  exec(message, { command }) {
+  async exec(message, { command }) {
     const embed = new MessageEmbed().setColor(
       message.guild?.me.roles.color?.color ?? "#c800ff"
     )
@@ -58,8 +58,11 @@ class HelpCommand extends Command {
         .setTitle("❯ Commandes")
         .setDescription(
           stripIndents`
-                    Une liste des commandes disponnibles\n
-                    Pour plus d'infos sur une commande, ${await db.prefixes.ensure(message.guild.id, "a,")}help *cmd*\n
+                    Une liste des commandes disponibles !
+                    Pour plus d'infos sur une commande, **${await db.prefixes.ensure(
+                      message.guild.id,
+                      "a,"
+                    )}**help ***cmd***.
                     Le nombre représente le nombre de commande !
                     `
         )

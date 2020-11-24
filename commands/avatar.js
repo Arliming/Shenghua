@@ -7,7 +7,7 @@ module.exports = class extends Command {
       args: [
         {
           id: "target",
-          type: Argument.union("member", "user", "relevant", "text")
+          type: Argument.union("member", "user", "relevant", "text"),
         },
       ],
       channel: "guild",
@@ -23,16 +23,16 @@ module.exports = class extends Command {
 
   async exec(message, { target }) {
     let user
-    if(typeof target === "string"){
+    if (typeof target === "string") {
       try {
-      user = await message.client.users.fetch(target)
-      }catch(err){
+        user = await message.client.users.fetch(target)
+      } catch (err) {
         user = null
       }
-    }else{
+    } else {
       user = target?.user ?? target
     }
-    if(!user) user = message.author
+    if (!user) user = message.author
 
     const embed = new MessageEmbed()
       .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")

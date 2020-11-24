@@ -1,4 +1,5 @@
 const { Command, Argument } = require("discord-akairo")
+const Discord = require("discord.js")
 
 module.exports = class extends Command {
   constructor() {
@@ -8,7 +9,7 @@ module.exports = class extends Command {
       args: [
         {
           id: "target",
-          type: Argument.union("member", "user", "relevant", "text")
+          type: Argument.union("member", "user", "relevant", "text"),
         },
       ],
       aliases: ["ban", "banned"],
@@ -23,24 +24,27 @@ module.exports = class extends Command {
 
   async exec(message, { target }) {
     let user
-    if(typeof target === "string"){
+    if (typeof target === "string") {
       try {
-      user = await message.client.users.fetch(target)
-      }catch(err){
+        user = await message.client.users.fetch(target)
+      } catch (err) {
         user = null
       }
-    }else{
+    } else {
       user = target?.user ?? target
     }
+    if(target instanceof Discord.User) 
+      target = await message.guild.members.fetch(target)
 
-    const grade = message.user.roles.highest.comparePositionTo(
-      user.roles.highest
-    )
+    const grade = await message.member
+      .fetch()
+      .then((m) => m.roles.highest.comparePositionTo(target.roles.highest))
+
     if (grade > 0) {
-      if (user.bannable) {
+      if (target.bannable) {
         if (user) {
-          await user.ban()
-          await message.channel.send(`${user.username} a été ban !`)
+          await target.ban()
+          await message.channel.send(`${user.username} a été ban`)
         } else {
           await message.channel.send("Précise qui tu veux ban ?")
         }

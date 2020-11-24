@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "common-tags": "^1.8.0",
+    "dayjs": "^1.9.6",
     "discord-akairo": "^8.1.0",
     "discord-eval.js": "^1.0.13",
     "discord.js": "^12.4.1",
