@@ -2,6 +2,7 @@ const { stripIndents } = require("common-tags")
 const db = require("../db.js")
 const { Command } = require("discord-akairo")
 const { MessageEmbed } = require("discord.js")
+const utils = require("../utils")
 
 class HelpCommand extends Command {
   constructor() {
@@ -71,16 +72,17 @@ class HelpCommand extends Command {
           this.client.user.displayAvatarURL()
         )
 
-      for (const category of this.handler.categories.values()) {
-        embed.addField(
-          `❯ ${category.id.replace(/(\b\w)/gi, (lc) => lc.toUpperCase())} - ${
-            category.size
-          }`,
-          `${category
-            .filter((cmd) => cmd.aliases.length > 0)
-            .map((cmd) => `\`${cmd.aliases[0]}\``)
-            .join(", ")}`
-        )
+        for (const category of this.handler.categories.values()) {
+          if(category.id === "hidden") continue;
+                  embed.addField(
+                    `❯ ${utils.display(category.id)} - ${
+                      category.size
+                    }`,
+                    `${category
+                      .filter((cmd) => cmd.aliases.length > 0)
+                      .map((cmd) => `\`${cmd.aliases[0]}\``)
+                      .join(", ")}`
+                  )
       }
     }
 

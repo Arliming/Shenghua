@@ -8,7 +8,7 @@ module.exports = class extends Command {
       channel: "guild",
       cooldown: 1000 * 60 * 5,
       aliases: ["deploy", "reload"],
-      category: "secret",
+      category: "hidden",
       description: "Déploie en production le dernier push",
     })
   }

@@ -6,7 +6,7 @@ class JSeval extends Command {
     super("js", {
       aliases: ["js", "run", "eval"],
       ownerOnly: true,
-      category: "secret",
+      category: "hidden",
       description: {
         content: "Run un code js",
         usage: "[code]",

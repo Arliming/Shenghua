@@ -4,7 +4,7 @@ const dayjs = require('dayjs')
 const relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.locale('fr')
 dayjs.extend(relativeTime)
-const { resolveRegion } = require("../utils")
+const utils = require("../utils")
 
 const filterLevels = {
   DISABLED: "Off",
@@ -52,7 +52,7 @@ module.exports = class extends Command {
         `**• Name :** ${guild.name}`,
         `**• ID :** ${guild.id}`,
         `**• Owner :** ${await guild.members.fetch(guild.ownerID)}`,
-        `**• Région :** ${resolveRegion(guild.region)}`,
+        `**• Région :** ${utils.display(guild.region)}`,
         `**• Boost Tier :** ${
           guild.premiumTier ? `Tier ${guild.premiumTier}` : "None"
         }`,
