@@ -72,17 +72,15 @@ class HelpCommand extends Command {
           this.client.user.displayAvatarURL()
         )
 
-        for (const category of this.handler.categories.values()) {
-          if(category.id === "hidden") continue;
-                  embed.addField(
-                    `❯ ${utils.display(category.id)} - ${
-                      category.size
-                    }`,
-                    `${category
-                      .filter((cmd) => cmd.aliases.length > 0)
-                      .map((cmd) => `\`${cmd.aliases[0]}\``)
-                      .join(", ")}`
-                  )
+      for (const category of this.handler.categories.values()) {
+        if (category.id === "hidden") continue
+        embed.addField(
+          `❯ ${utils.display(category.id)} - ${category.size}`,
+          `${category
+            .filter((cmd) => cmd.aliases.length > 0)
+            .map((cmd) => `\`${cmd.aliases[0]}\``)
+            .join(", ")}`
+        )
       }
     }
 

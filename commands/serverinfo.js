@@ -1,8 +1,8 @@
 const { Command } = require("discord-akairo")
 const { MessageEmbed } = require("discord.js")
-const dayjs = require('dayjs')
-const relativeTime = require('dayjs/plugin/relativeTime')
-dayjs.locale('fr')
+const dayjs = require("dayjs")
+const relativeTime = require("dayjs/plugin/relativeTime")
+dayjs.locale("fr")
 dayjs.extend(relativeTime)
 const utils = require("../utils")
 
@@ -62,9 +62,7 @@ module.exports = class extends Command {
         }`,
         `**• Date de Création :** ${dayjs(guild.createdTimestamp).format(
           "DD MMMM YYYY |"
-        )} ${dayjs(
-          guild.createdTimestamp
-        ).fromNow()}`,
+        )} ${dayjs(guild.createdTimestamp).fromNow()}`,
         "\u200b",
       ])
       .addField("Statistiques", [

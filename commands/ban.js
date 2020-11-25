@@ -34,28 +34,32 @@ module.exports = class extends Command {
     } else {
       user = target?.user ?? target
     }
-    if (target instanceof Discord.User)
-      target = await message.guild.members.fetch(target)
+    if (!user) {
+      return message.channel.send("Je ne trouve pas la personne à ban ?")
+    } else {
+      if (target instanceof Discord.User)
+        target = await message.guild.members.fetch(target)
 
-    const grade = await message.member
-      .fetch()
-      .then((m) => m.roles.highest.comparePositionTo(target.roles.highest))
+      const grade = await message.member
+        .fetch()
+        .then((m) => m.roles.highest.comparePositionTo(target.roles.highest))
 
-    if (grade > 0) {
-      if (target.bannable) {
-        if (user) {
-          await target.ban()
-          await message.channel.send(`${user.username} a été ban`)
+      if (grade > 0) {
+        if (target.bannable) {
+          if (user) {
+            await target.ban()
+            await message.channel.send(`${user.username} a été ban`)
+          } else {
+            await message.channel.send("Précise qui tu veux ban ?")
+          }
         } else {
-          await message.channel.send("Précise qui tu veux ban ?")
+          await message.channel.send("Je ne possède pas la permission :/")
         }
       } else {
-        await message.channel.send("Je ne possède pas la permission :/")
+        await message.channel.send(
+          "**Cette fois-ci c'est non !** \nFini la guéguerre entre le staff <:A_MaePolice:767726955637243966>"
+        )
       }
-    } else {
-      await message.channel.send(
-        "**Cette fois-ci c'est non !** \nFini la guéguerre entre le staff <:A_MaePolice:767726955637243966>"
-      )
     }
   }
 }

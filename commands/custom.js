@@ -19,7 +19,7 @@ module.exports = class extends Command {
           id: "key",
           type: [
             ["add", "push", "new"],
-            ["remove", "rm", "delete", "del"],
+            ["remove", "rm", "delete", "del", "suppr"],
             ["use", "call"],
             ["list", "all"],
           ],
@@ -50,7 +50,7 @@ module.exports = class extends Command {
       case "use":
       case "add":
         if (!regexResult || !regexResult.match) {
-          return message.util.send("y manque le name gneuh")
+          return message.util.send("Il faut indiquer le nom de la commande !")
         }
         break
       default:
@@ -79,7 +79,8 @@ module.exports = class extends Command {
       case "use":
         return message.util.send(command.content)
       case "add":
-        if (!content) return message.util.send("y manque le content gneuh")
+        if (!content)
+          return message.util.send("Il faut un contenue à la commande !")
         await db.customCommands.push(message.guild.id, { name, content })
         return message.util.send(
           `La commande ${name} à été rajoutée !\n\nRéponse:\n${content}`

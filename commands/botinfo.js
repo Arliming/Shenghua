@@ -1,6 +1,6 @@
 const { Command } = require("discord-akairo")
 const { MessageEmbed } = require("discord.js")
-const tims = require('tims')
+const tims = require("tims")
 
 module.exports = class extends Command {
   constructor() {
@@ -23,19 +23,24 @@ module.exports = class extends Command {
         message.author.displayAvatarURL({ dynamic: true })
       )
       .setThumbnail(message.client.user.displayAvatarURL({ dynamic: true }))
-      .setDescription(`[Shēnghuá](https://discord.com/oauth2/authorize?client_id=770769340693217281&scope=bot&permissions=8)`)
+      .setDescription(
+        `[Shēnghuá](https://discord.com/oauth2/authorize?client_id=770769340693217281&scope=bot&permissions=8)`
+      )
       .addFields(
         {
           name: "Mémoire",
-          value: `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
+          value: `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(
+            2
+          )} MB`,
           inline: true,
         },
 
         {
           name: "Uptime",
-          value: `${
-            tims.duration( message.client.uptime, { locale: 'fr' })
-          }`,
+          value: `${tims.duration(message.client.uptime, {
+            locale: "fr",
+            lang: "fr",
+          })}`,
           inline: true,
         },
 
@@ -63,9 +68,9 @@ module.exports = class extends Command {
           name: "Source",
           value: `[github](https://github.com/Arliming/Shenghua)`,
           inline: true,
-        },
+        }
       )
-      .setFooter("Made by Arliming |")
+      .setFooter("Made by Arliming")
       .setTimestamp()
     await message.channel.send(embed)
   }
