@@ -5,7 +5,6 @@ module.exports = class extends Command {
   constructor() {
     super("custom", {
       cooldown: 5000,
-      userPermissions: "MANAGE_MESSAGES",
       aliases: ["custom", "command", "cmd", "cc"],
       channel: "guild",
       category: "custom",
