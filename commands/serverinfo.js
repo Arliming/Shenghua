@@ -1,6 +1,9 @@
 const { Command } = require("discord-akairo")
 const { MessageEmbed } = require("discord.js")
-const moment = require("moment")
+const dayjs = require('dayjs')
+const relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.locale('fr')
+dayjs.extend(relativeTime)
 const { resolveRegion } = require("../utils")
 
 const filterLevels = {
@@ -57,9 +60,9 @@ module.exports = class extends Command {
         `**• Verification Level :** ${
           verificationLevels[guild.verificationLevel]
         }`,
-        `**• Date de Création :** ${moment(guild.createdTimestamp).format(
-          "HH:mm"
-        )} ${moment(guild.createdTimestamp).format("LL")} ${moment(
+        `**• Date de Création :** ${dayjs(guild.createdTimestamp).format(
+          "DD MMMM YYYY |"
+        )} ${dayjs(
           guild.createdTimestamp
         ).fromNow()}`,
         "\u200b",
@@ -74,10 +77,6 @@ module.exports = class extends Command {
           emojis.filter((emoji) => emoji.animated).size
         }`,
         `**• Nombre de Membres :** ${guild.memberCount}`,
-        `**• Utilisateurs :** ${
-          members.filter((member) => !member.user.bot).size
-        }`,
-        `**• Bots :** ${members.filter((member) => member.user.bot).size}`,
         `**• Text Channels :** ${
           channels.filter((channel) => channel.type === "text").size
         }`,
