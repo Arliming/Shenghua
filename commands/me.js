@@ -67,6 +67,10 @@ module.exports = class extends Command {
         }
       )
       .addFields({
+        name: "Status :",
+        value: `${target.user.presence.activities.length > 0 ? target.user.presence.activities[0].state : "Pas d'activités"}`
+      })
+      .addFields({
         name: "Compte créé le :",
         value: `${dayjs(target.user.createdTimestamp).format(
           "HH:mm DD/MM/YYYY"
