@@ -24,7 +24,7 @@ module.exports = class extends Command {
       )
       .setThumbnail(message.client.user.displayAvatarURL({ dynamic: true }))
       .setDescription(
-        `[Shēnghuá](https://discord.com/oauth2/authorize?client_id=770769340693217281&scope=bot&permissions=8)`
+        `**[Shēnghuá](https://discord.com/oauth2/authorize?client_id=770769340693217281&scope=bot&permissions=8)**`
       )
       .addFields(
         {
