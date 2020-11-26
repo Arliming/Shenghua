@@ -24,9 +24,8 @@ module.exports = class extends Command {
   }
 
   async exec(message, { target }) {
-
-    if(!target) target = message.member
-   else if (typeof target === "string") {
+    if (!target) target = message.member
+    else if (typeof target === "string") {
       try {
         target = await message.guild.members.fetch(target)
       } catch (err) {
@@ -38,8 +37,8 @@ module.exports = class extends Command {
     await target.user.fetch()
 
     const rolescount = target.roles.cache
-    .sort((a, b) => b.position - a.position)
-    .map((role) => role.toString())
+      .sort((a, b) => b.position - a.position)
+      .map((role) => role.toString())
 
     const embed = new MessageEmbed()
       .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
@@ -65,27 +64,27 @@ module.exports = class extends Command {
           name: "ID :",
           value: `${target.user.id}`,
           inline: true,
-        },
+        }
       )
-      .addFields(
-        {
-          name: "Compte créé le :",
-          value: `${dayjs(target.user.createdTimestamp).format(
-            "HH:mm DD/MM/YYYY"
-          )} | ${dayjs(target.user.createdTimestamp).fromNow()}`,
-        },
-      )
-      .addFields(
-        {
-          name: "Rejoin le serveur le :",
-          value: `${dayjs(target.joinedAt).format(
-            " HH:mm DD/MM/YYYY"
-          )} | ${dayjs(target.joinedAt).fromNow()}`,
-        },
-      )
+      .addFields({
+        name: "Compte créé le :",
+        value: `${dayjs(target.user.createdTimestamp).format(
+          "HH:mm DD/MM/YYYY"
+        )} | ${dayjs(target.user.createdTimestamp).fromNow()}`,
+      })
+      .addFields({
+        name: "Rejoin le serveur le :",
+        value: `${dayjs(target.joinedAt).format(" HH:mm DD/MM/YYYY")} | ${dayjs(
+          target.joinedAt
+        ).fromNow()}`,
+      })
       .setDescription(
         `**Rôles [${rolescount.length - 1}]**
-        ${target.roles.cache.array((roles) => roles.name).sort((a, b) => b.position - a.position).filter(r => r.id !== message.guild.id).join("")}`
+        ${target.roles.cache
+          .array((roles) => roles.name)
+          .sort((a, b) => b.position - a.position)
+          .filter((r) => r.id !== message.guild.id)
+          .join("")}`
       )
       .setTimestamp()
     await message.channel.send(embed)
