@@ -35,7 +35,7 @@ module.exports = class extends Command {
     
     let status = target.user.presence.activities.find(stf => stf.name === 'Spotify' && stf.type === 'LISTENING');
 
-    if (target.user.presence.activities.length === 0 || status.name !== "Spotify" && status.type !== "LISTENING") return message.channel.send("Cette personne n'écoute pas Spotify.");
+    if (!status) return message.channel.send("Cette personne n'écoute pas Spotify.");
     
     if (status !== null && status.type === "LISTENING" && status.name === "Spotify" && status.assets !== null) {
       let image = `https://i.scdn.co/image/${status.assets.largeImage.slice(8)}`,
