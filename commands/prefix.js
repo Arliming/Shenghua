@@ -8,7 +8,7 @@ module.exports = class extends Command {
       cooldown: 5000,
       aliases: ["prefix", "pfx"],
       channel: "guild",
-      category: "Modération",
+      category: "custom",
       description: {
         content: "Modifie le prefix pour votre discord",
       },

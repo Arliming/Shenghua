@@ -7,6 +7,7 @@ const utils = require("../utils")
 class HelpCommand extends Command {
   constructor() {
     super("help", {
+      channel: "guild",
       aliases: ["help", "h"],
       args: [
         {
