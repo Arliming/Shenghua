@@ -2,6 +2,7 @@ const { Command } = require("discord-akairo")
 const db = require("../db.js")
 const dayjs = require("dayjs")
 const Discord = require("discord.js")
+const tims = require("tims")
 
 module.exports = class extends Command {
   constructor() {
@@ -41,7 +42,6 @@ module.exports = class extends Command {
     const reminds = await db.globals.ensure("reminds", [])
     const userReminds = reminds.filter(remind => remind.user === message.author.id)
 
-    
     switch(key){
       case "add":
         if (userReminds.length > 9)
@@ -91,7 +91,7 @@ module.exports = class extends Command {
           user: message.author.id
         })
         
-        return message.util.send("remind saved")
+        return message.util.send("Je vous rapelle pour ça dans " + tims.between(Date.now(), endingTimestamp, { locale: "fr" }))
       case "show": {
         if (!indicator) return message.reply(" Il manque l'indicateur !")
 
