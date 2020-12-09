@@ -56,6 +56,8 @@ module.exports = class extends Command {
         if(!content) return message.reply(" Il manque le contenu !")
 
         let [, count, unity ] = match
+        
+        if(count.length > 7) return message.reply(" L'indicateur de durée est trop grand.")
 
         count = Number(count)
 
