@@ -5,7 +5,6 @@ module.exports = class extends Command {
   constructor() {
     super("showprefix", {
       prefix: "",
-      cooldown: 5000,
       aliases: ["<@770769340693217281>"],
       category: "hidden",
       description: {
