@@ -38,7 +38,6 @@ module.exports = class extends Command {
   }
 
   async exec(message, { key, content, indicator }) {
-    console.table({ key, content, indicator })
     const reminds = await db.globals.ensure("reminds", [])
     const userReminds = reminds.filter(remind => remind.user === message.author.id)
 
