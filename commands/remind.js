@@ -91,7 +91,7 @@ module.exports = class extends Command {
           user: message.author.id
         })
         
-        return message.util.send("Je vous rapelle pour ça dans " + tims.between(Date.now(), endingTimestamp, { locale: "fr" }))
+        return message.util.send("Je vous rappelle pour ça dans " + tims.between(Date.now(), endingTimestamp, { locale: "fr" }))
       case "show": {
         if (!indicator) return message.reply(" Il manque l'indicateur !")
 
