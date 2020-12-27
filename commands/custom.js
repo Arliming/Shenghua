@@ -84,7 +84,7 @@ module.exports = class extends Command {
           return message.util.send("Il faut un contenue à la commande !")
         await db.customCommands.push(message.guild.id, { name, content })
         return message.util.send(
-          `La commande ${name} à été rajoutée !\n\nRéponse:\n${content}`
+          `La commande ${name} a été rajoutée !\n\nRéponse:\n${content}`
         )
     }
   }
