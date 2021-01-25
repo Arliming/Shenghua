@@ -22,15 +22,15 @@ module.exports = class extends Command {
       .setTitle("JoJo no Kimyou na Bouken ジョジョの奇妙な冒険")
     .addField("Synopsis :",
       `*Le surnom JoJo est donné aux différents héros de la série, du fait que ces deux syllabes apparaissent dans leur nom :
-                    Jonathan Joestar
-                    Joseph Joestar
-                    Jôtarô Kûjô
-                    Jôsuke Higashikata (4) (« Jôsuke » s'écrit « 仗助 » ; si le premier kanji se prononce « Jô », le second peut être prononcé soit « Suke » soit « Jo », d'où son surnom)
-                    Giorno Giovanna, prononciation à l'italienne d' « Haruno Shiobana » (les syllabes « Jo » et « Gio » s’écrivent de la même manière en katakana (ジョ))
-                    Jolyne Kûjô
-                    Johnny Joestar
-                    Jôsuke Higashikata (8) (même procédé que le précédent ; sauf qu'il ne s'agit pas de la même personne, celui-ci étant le héros principal dans la huitième partie, JoJolion)
-                    Jojo est effectivement divisé en 8 parties, qui raconte toute l'histoire de leurs héros respectifs*\n`
+    •Jonathan Joestar
+    •Joseph Joestar
+    •Jôtarô Kûjô
+    •Jôsuke Higashikata (4) (« Jôsuke » s'écrit « 仗助 » ; si le premier kanji se prononce « Jô », le second peut être prononcé soit « Suke » soit « Jo »)
+    •Giorno Giovanna, italien d' « Haruno Shiobana » (les syllabes « Jo » et « Gio » s’écrivent de la même manière en katakana (ジョ))
+    •Jolyne Kûjô
+    •Johnny Joestar
+    •Jôsuke Higashikata (8) (même procédé que le précédent ; celui-ci étant le héros principal dans la huitième partie, JoJolion)
+Jojo est effectivement divisé en 8 parties, qui raconte toute l'histoire de leurs héros respectifs, c'est un anime fun presque parodique*\n`
     )
     .addField(
       '**Shounen genres :  Action, Adventure, Supernatural, Vampire**',
