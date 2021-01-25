@@ -15,7 +15,10 @@ module.exports = class extends Command {
   async exec(message) {
 
     const embed = new MessageEmbed()
-      .setAuthor(message.author.tag, message.author.avatarURL)
+      .setAuthor(
+        message.author.tag,
+        message.author.displayAvatarURL({ dynamic: true })
+      )
       .setTitle("Violet Evergarden ヴァイオレット・エヴァーガーデン")
       .addField("Synopsis :",
         `*La guerre opposant Leidenschaftreich à l'Empire Gardarik a finalement pris fin. Violet, une jeune fille formée dans le seul but de décimer les lignes ennemies, est hospitalisée suite à une violente opération. Après avoir tout perdu, elle se raccroche aux derniers mots du Major, son supérieur hiérarchique, mais sans comprendre leur signification. Se remettant de ses blessures, elle décide de commencer une nouvelle vie à CH Postal, une entreprise postale. Un jour, elle assiste par pur hasard au travail d'une «poupée de souvenirs automatiques», une personne qui retranscrit les pensées et les sentiments d'autrui dans des lettres. Intéressée, Violet commence à travailler en tant que poupée de souvenirs automatiques, un métier qui va lui permettre d'aider ses clients et de comprendre les derniers mots de celui qu'elle aimait.*\n`

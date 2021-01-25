@@ -15,7 +15,10 @@ module.exports = class extends Command {
   async exec(message) {
 
     const embed = new MessageEmbed()
-      .setAuthor(message.author.tag, message.author.avatarURL)
+      .setAuthor(
+        message.author.tag,
+        message.author.displayAvatarURL({ dynamic: true })
+      )
       .setTitle("Dr. Stone ドクターストーン")
       .addField("Synopsis :",
         `*Taiju, lycéen comme les autres, est sur le point d’annoncer à une fille qu’il est secrètement amoureux d’elle. Alors qu'il s'apprête a lui déclarer sa flamme, une lumière brillante apparaît dans le ciel et pétrifie toute l'humanité sur Terre. Au fil des années, bien décidé à l'idée d'avouer ses sentiments pour Yuzuriha, Taiju parvient à se libérer et trouve un message gravé dans un arbre. Yuzuriha essaie tant bien que mal de lui faire comprendre que Senku est également sorti de l'emprise de la pierre. Ce dernier est parvenu à maintenir sa conscience vivante en comptant combien de temps il a été pétrifié. Ainsi, Taiju apprend que la date actuelle est le 5 octobre 5738…*\n`

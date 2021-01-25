@@ -15,7 +15,10 @@ module.exports = class extends Command {
   async exec(message) {
 
     const embed = new MessageEmbed()
-    .setAuthor(message.author.tag)
+      .setAuthor(
+        message.author.tag,
+        message.author.displayAvatarURL({ dynamic: true })
+      )
     .setDescription(
       `1• Shingeki no Kyujin / Attaque des Titans \n`+
       `2• Code Geass \n`+
