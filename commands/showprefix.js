@@ -15,7 +15,7 @@ module.exports = class extends Command {
 
   async exec(message) {
     await message.channel.send(
-      `**Mon préfix est :** \n> ${await db.prefixes.ensure(
+      `**Mon prefix est :** \n> ${await db.prefixes.ensure(
         message.guild.id,
         "a,"
       )}`
