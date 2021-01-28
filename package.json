@@ -8,6 +8,7 @@
     "ghomap": "^0.1.5-beta",
     "godembed": "^1.0.4",
     "parse-ms": "^2.1.0",
+    "snekfetch": "^4.0.4",
     "tims": "^2.0.4"
   },
   "main": "index.js",
