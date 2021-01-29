@@ -4,29 +4,29 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = class extends Command {
   constructor() {
-    super("shooting", {
-      aliases: ["shoot", "tire"],
+    super("wasting", {
+      aliases: ["wasted", "kill", "suicide"],
       channel: "guild",
       category: "Fun",
       description: {
         content:
-          "envoie un gif aléatoire pour tirer sur quelqu'un :/",
+          "envoie un gif aléatoire pour tuer quelqu'un O_O",
       },
     })
   }
 
   async exec(message) {
     let Members = message.mentions.members.first();
-    const { body } = await get("https://api.tenor.com/v1/random?q=shoot-anime&key=6BCDWZTZ8A07&limit=1");
+    const { body } = await get("https://api.tenor.com/v1/random?q=wasted-anime&key=6BCDWZTZ8A07&limit=1");
     let gif = body["results"][0]["media"][0]["gif"]["url"];
 
     if (Members) {
       const embed = new MessageEmbed()
 
         .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
-        .setTitle(`${message.author.username} tire sur ${Members.user.username}`)
+        .setTitle(`${message.author.username} a tué ${Members.user.username}`)
         .setImage(gif)
-        .setFooter("shoot")
+        .setFooter("wasted")
         .setTimestamp()
 
       await message.channel.send(embed)
@@ -34,9 +34,9 @@ module.exports = class extends Command {
       const embed = new MessageEmbed()
 
         .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
-        .setTitle(`${message.author.username} se tire dessus o_o`)
+        .setTitle(`${message.author.username} se suicide O_O`)
         .setImage(gif)
-        .setFooter("shoot")
+        .setFooter("wasted")
         .setTimestamp()
 
       await message.channel.send(embed)
