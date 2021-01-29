@@ -31,7 +31,6 @@ module.exports = class extends Command {
 
       await message.channel.send(embed)
     } else {
-      if (!Members || Members.user.id === message.author.id) {
         const embed = new MessageEmbed()
 
           .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
@@ -41,7 +40,6 @@ module.exports = class extends Command {
           .setTimestamp()
 
         await message.channel.send(embed)
-      }
     }
   }
 }
