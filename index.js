@@ -2,7 +2,7 @@ const db = require("./db.js")
 const { AkairoClient, CommandHandler, ListenerHandler } = require("discord-akairo")
 
 const client = new AkairoClient({
-  ownerID: ["308540889754501120", "352176756922253321"],
+  ownerID: ["308540889754501120", "352176756922253321", "490856882270109696"],
   disableMentions: "everyone",
 })
 
