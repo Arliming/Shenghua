@@ -1,11 +1,12 @@
 const evaluate = require("ghom-eval")
 const { MessageEmbed } = require("discord.js")
 const { Command } = require("discord-akairo")
+const pattern = /^```(\S+)?\s(.+[^\\])```$/is
 
 class JSeval extends Command {
   constructor() {
     super("js", {
-      aliases: ["js", "run", "eval"],
+      aliases: ["js", "run", "eval", "="],
       ownerOnly: true,
       category: "hidden",
       description: {
@@ -18,7 +19,10 @@ class JSeval extends Command {
 
   async exec(message) {
     const { prefix, alias } = message.util.parsed
-    const code = message.content.slice((prefix + alias).length)
+    
+    let code = message.content.slice((prefix + alias).length).trim()
+
+    if (pattern.test(code)) code = code.replace(pattern, "$2")
     
     const evaluated = await evaluate(code, message, "message")
 
