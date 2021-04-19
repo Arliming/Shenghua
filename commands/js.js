@@ -16,7 +16,7 @@ class JSeval extends Command {
     })
   }
 
-  exec(message) {
+  async exec(message) {
     const { prefix, alias } = message.util.parsed
     const code = message.content.slice((prefix + alias).length)
     
