@@ -1,4 +1,5 @@
 const evaluate = require("ghom-eval")
+const { MessageEmbed } = require("discord.js")
 const { Command } = require("discord-akairo")
 
 class JSeval extends Command {
@@ -22,25 +23,19 @@ class JSeval extends Command {
     const evaluated = await evaluate(code, message, "message")
 
     await message.channel.send(
-        new app.MessageEmbed()
+        new MessageEmbed()
           .setColor(evaluated.failed ? "RED" : "BLURPLE")
           .setTitle(
             `${evaluated.failed ? "\\❌" : "\\✔"} Result of JS evaluation ${
               evaluated.failed ? "(failed)" : ""
             }`
           )
-          .setDescription(
-            app.CODE.stringify({
-              content: evaluated.output.slice(0, 2000),
-              lang: "js",
-            })
+          .setDescription("```js\n" + 
+            evaluated.output.slice(0, 2000) + "```"
           )
           .addField(
-            "Information",
-            app.CODE.stringify({
-              content: `type: ${evaluated.type}\nclass: ${evaluated.class}\nduration: ${evaluated.duration}ms`,
-              lang: "yaml",
-            })
+            "Information", "```yaml\n" + 
+            `type: ${evaluated.type}\nclass: ${evaluated.class}\nduration: ${evaluated.duration}ms`+ "```"
           )
       )
   }
