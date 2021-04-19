@@ -1,4 +1,4 @@
-const deval = require("discord-eval.js")
+const evaluate = require("ghom-eval")
 const { Command } = require("discord-akairo")
 
 class JSeval extends Command {
@@ -18,7 +18,31 @@ class JSeval extends Command {
   exec(message) {
     const { prefix, alias } = message.util.parsed
     const code = message.content.slice((prefix + alias).length)
-    return deval(code, message)
+    
+    const evaluated = await evaluate(code, message, "message")
+
+    await message.channel.send(
+        new app.MessageEmbed()
+          .setColor(evaluated.failed ? "RED" : "BLURPLE")
+          .setTitle(
+            `${evaluated.failed ? "\\❌" : "\\✔"} Result of JS evaluation ${
+              evaluated.failed ? "(failed)" : ""
+            }`
+          )
+          .setDescription(
+            app.CODE.stringify({
+              content: evaluated.output.slice(0, 2000),
+              lang: "js",
+            })
+          )
+          .addField(
+            "Information",
+            app.CODE.stringify({
+              content: `type: ${evaluated.type}\nclass: ${evaluated.class}\nduration: ${evaluated.duration}ms`,
+              lang: "yaml",
+            })
+          )
+      )
   }
 }
 
