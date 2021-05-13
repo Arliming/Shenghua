@@ -3,7 +3,7 @@
     "common-tags": "^1.8.0",
     "dayjs": "^1.9.6",
     "discord-akairo": "^8.1.0",
-    "discord-eval.js": "^1.0.13",
+    "ghom-eval": "^1.0.3",
     "discord.js": "^12.5.1",
     "ghomap": "^0.1.5-beta",
     "godembed": "^1.0.4",
