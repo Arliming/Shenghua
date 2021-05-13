@@ -16,7 +16,7 @@ class CmdInvit extends Command {
     const embed = new MessageEmbed()
       .setTitle("Voici le lien d'invitation de Shēnghuá")
       .setDescription(
-        "[>>Invite moi<<](https://discord.com/oauth2/authorize?client_id=770769340693217281&scope=bot&permissions=8)"
+        "[>>Invite moi<<](https://discord.com/oauth2/authorize?client_id=842350911909396500&scope=bot&permissions=8)"
       )
       .setColor(message.guild?.me.roles.color?.color ?? "#c800ff")
       .setAuthor(
